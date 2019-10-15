@@ -61,6 +61,35 @@ class Chunk
                     }
                 }
             }
+
+            // Random Tree
+            for (int i = 1; i < App.CHUNK_SIZE.x-1; i++)
+            {
+                if (floor(random(0, 10)) == 0)
+                {
+                    for (int j = 0; j < App.CHUNK_SIZE.y; j++)
+                    {
+                        if (this.blocks[i][j].id == 5)
+                        {
+                            int tTreeHeight = floor(random(5, 7));
+                            for (int k = 0; k < tTreeHeight; k++)
+                            {
+                                this.blocks[i][j-k] = new Block(new Vector(i, j-k), 9);
+                            }
+                            // Leaves
+                            try { this.blocks[i][j-tTreeHeight] = new Block(new Vector(i, j-tTreeHeight), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i][j-tTreeHeight-1] = new Block(new Vector(i, j-tTreeHeight-1), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i-1][j-tTreeHeight] = new Block(new Vector(i-1, j-tTreeHeight), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i+1][j-tTreeHeight] = new Block(new Vector(i+1, j-tTreeHeight), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i-2][j-tTreeHeight] = new Block(new Vector(i-2, j-tTreeHeight), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i+2][j-tTreeHeight] = new Block(new Vector(i+2, j-tTreeHeight), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i-1][j-tTreeHeight-1] = new Block(new Vector(i-1, j-tTreeHeight-1), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            try { this.blocks[i+1][j-tTreeHeight-1] = new Block(new Vector(i+1, j-tTreeHeight-1), floor(random(10, 12))); } catch(ArrayIndexOutOfBoundsException ex) {}
+                            break;
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -96,7 +125,7 @@ class Block
 {
     Vector pos;
     int id;
-    color col;
+    color col, col2;
     Boolean solid;
 
     Block(Vector pos, int id)
@@ -107,6 +136,15 @@ class Block
         { this.col = App.COLOURS[this.id]; }
         catch(ArrayIndexOutOfBoundsException ex)
         { this.col = App.COLOURS[0]; }
+        
+        switch (this.id) {
+            case 5: // Grass
+                try
+                { this.col2 = App.COLOURS[floor(random(6, 9))]; }
+                catch(ArrayIndexOutOfBoundsException ex)
+                { this.col2 = App.COLOURS[0]; }
+                break;
+        }
 
         if (this.id == 1)
         { this.solid = false; }

@@ -6,10 +6,10 @@ int tVary;
 // Temp
 void setup()
 {
-    size(901, 901);
+    size(901, 1001);
     background(0); textAlign(CENTER); text("Generating...", width/2, height/2); // Loading Text
 
-    Vector WINDOW_SIZE = new Vector(width-1, height-1);
+    Vector WINDOW_SIZE = new Vector(width-1, height-101);
 
     Vector WORLD_SIZE = new Vector(20, 20);
     Vector CHUNK_SIZE = new Vector(20, 20);
@@ -24,7 +24,10 @@ void setup()
         color(126, 200, 80 ), // Grass
         color(97 , 63 , 16 ), // Dirt 1
         color(107, 73 , 26 ), // Dirt 2
-        color(87 , 53 , 6  )  // Dirt 3
+        color(87 , 53 , 6  ), // Dirt 3
+        color(86 , 47 , 14 ), // Wood
+        color(30 , 147, 45 ), // Leaf 1
+        color(77 , 168, 59 )  // Leaf 2
     };
 
     Vector PLAYER_START_CHUNK = new Vector(floor(WORLD_SIZE.x/2), App.D_CHUNK_HEIGHT);
